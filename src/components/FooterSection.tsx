@@ -56,10 +56,29 @@ const CTA_LABELS: Record<string, { newsletter: string; article: string; book: st
   'ar': { newsletter: 'نشرة LinkedIn', article: 'مقال على Medium', book: 'كتاب على Amazon' },
 };
 
+const LEGAL_LABELS: Record<string, { title: string; readme: string; license: string; concept: string }> = {
+  'pt-PT': { title: 'Documentação e Legal', readme: 'README do projeto', license: 'Licença MIT (código)', concept: 'Licença conceptual (CC BY 4.0)' },
+  'pt-BR': { title: 'Documentação e Legal', readme: 'README do projeto', license: 'Licença MIT (código)', concept: 'Licença conceitual (CC BY 4.0)' },
+  'en-US': { title: 'Documentation and Legal', readme: 'Project README', license: 'MIT License (code)', concept: 'Concept License (CC BY 4.0)' },
+  'en-GB': { title: 'Documentation and Legal', readme: 'Project README', license: 'MIT Licence (code)', concept: 'Concept Licence (CC BY 4.0)' },
+  'fr': { title: 'Documentation et mentions légales', readme: 'README du projet', license: 'Licence MIT (code)', concept: 'Licence conceptuelle (CC BY 4.0)' },
+  'es': { title: 'Documentación y legal', readme: 'README del proyecto', license: 'Licencia MIT (código)', concept: 'Licencia conceptual (CC BY 4.0)' },
+  'de': { title: 'Dokumentation und Rechtliches', readme: 'Projekt-README', license: 'MIT-Lizenz (Code)', concept: 'Konzept-Lizenz (CC BY 4.0)' },
+  'it': { title: 'Documentazione e legale', readme: 'README del progetto', license: 'Licenza MIT (codice)', concept: 'Licenza concettuale (CC BY 4.0)' },
+  'nl': { title: 'Documentatie en juridisch', readme: 'Project-README', license: 'MIT-licentie (code)', concept: 'Conceptlicentie (CC BY 4.0)' },
+  'ru': { title: 'Документация и правовая информация', readme: 'README проекта', license: 'Лицензия MIT (код)', concept: 'Лицензия концепции (CC BY 4.0)' },
+  'ja': { title: 'ドキュメントと法的情報', readme: 'プロジェクトREADME', license: 'MITライセンス（コード）', concept: 'コンセプトライセンス（CC BY 4.0）' },
+  'zh': { title: '文档与法律信息', readme: '项目 README', license: 'MIT 许可（代码）', concept: '概念许可（CC BY 4.0）' },
+  'ko': { title: '문서 및 법적 정보', readme: '프로젝트 README', license: 'MIT 라이선스(코드)', concept: '개념 라이선스(CC BY 4.0)' },
+  'ar': { title: 'التوثيق والمعلومات القانونية', readme: 'README للمشروع', license: 'ترخيص MIT (للكود)', concept: 'ترخيص المفهوم (CC BY 4.0)' },
+};
+
 export function FooterSection() {
   const { t, language } = useLanguage();
   const year = new Date().getFullYear();
   const cta = CTA_LABELS[language] || CTA_LABELS['en-US'];
+  const legal = LEGAL_LABELS[language] || LEGAL_LABELS['en-US'];
+  const baseUrl = import.meta.env.BASE_URL;
 
   return (
     <footer className="py-16 px-4 border-t border-border bg-card">
@@ -116,6 +135,36 @@ export function FooterSection() {
               <Icon size={18} />
             </a>
           ))}
+        </div>
+
+        <div className="max-w-3xl mx-auto mb-10 p-5 rounded-sm border border-border bg-background/60">
+          <h3 className="font-display text-lg text-foreground mb-3 text-center">{legal.title}</h3>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-sm">
+            <a
+              href={`${baseUrl}README.md`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-sm border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+            >
+              {legal.readme}
+            </a>
+            <a
+              href={`${baseUrl}LICENSE`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-sm border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+            >
+              {legal.license}
+            </a>
+            <a
+              href={`${baseUrl}CONCEPT-LICENSE.txt`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-sm border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+            >
+              {legal.concept}
+            </a>
+          </div>
         </div>
 
         {/* Copyright */}
