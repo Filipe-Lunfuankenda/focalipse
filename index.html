@@ -14,7 +14,7 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="/focalipse/" />
-    <script type="module" crossorigin src="/focalipse/assets/index-B7EL-Fk2.js"></script>
+    <script type="module" crossorigin src="/focalipse/assets/index-BA_45tDQ.js"></script>
     <link rel="modulepreload" crossorigin href="/focalipse/assets/vendor-nl6qcbmh.js">
     <link rel="modulepreload" crossorigin href="/focalipse/assets/chunk-query-aNMxt1Jf.js">
     <link rel="modulepreload" crossorigin href="/focalipse/assets/chunk-router-B45I5B35.js">
@@ -27,6 +27,19 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function restoreSpaPath(l) {
+        if (l.search[1] === '/') {
+          const decoded = l.search
+            .slice(1)
+            .split('&')
+            .map((s) => s.replace(/~and~/g, '&'))
+            .join('?');
+
+          window.history.replaceState(null, '', l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
