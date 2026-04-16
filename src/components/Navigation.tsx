@@ -1,11 +1,19 @@
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language, LANGUAGE_LABELS } from '@/i18n/types';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 
-const NAV_SECTIONS = [
-  'etymology', 'concept', 'psychology', 'structure', 
-  'taxonomy', 'examples', 'generator', 'verifier', 'manifesto', 'philosophy', 'articles', 'faq'
+const HOME_ANCHORS = [
+  'etymology', 'concept', 'psychology', 'structure',
+  'taxonomy', 'examples', 'generator', 'verifier',
+] as const;
+
+const LONG_READ_ROUTES = [
+  { key: 'manifesto', to: '/leituras/manifesto' },
+  { key: 'philosophy', to: '/leituras/philosophy' },
+  { key: 'articles', to: '/leituras/articles' },
+  { key: 'faq', to: '/leituras/faq' },
 ] as const;
 
 export function Navigation() {
@@ -30,16 +38,21 @@ export function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 md:h-16">
-          <a href="#" className="font-display text-lg md:text-xl font-bold text-foreground tracking-wide shrink-0 mr-6">
+          <Link to="/" className="font-display text-lg md:text-xl font-bold text-foreground tracking-wide shrink-0 mr-6">
             Focalipse
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <div className="hidden xl:flex items-center gap-2 2xl:gap-4 min-w-0">
-            {NAV_SECTIONS.map((section) => (
+            {HOME_ANCHORS.map((section) => (
               <a key={section} href={`#${section}`} className="nav-link-literary whitespace-nowrap text-[0.65rem] 2xl:text-[0.7rem]">
                 {t.nav[section as keyof typeof t.nav]}
               </a>
+            ))}
+            {LONG_READ_ROUTES.map((item) => (
+              <Link key={item.key} to={item.to} className="nav-link-literary whitespace-nowrap text-[0.65rem] 2xl:text-[0.7rem]">
+                {t.nav[item.key as keyof typeof t.nav]}
+              </Link>
             ))}
           </div>
 
@@ -75,7 +88,7 @@ export function Navigation() {
         {/* Mobile nav */}
         {mobileOpen && (
           <div className="xl:hidden pb-4 border-t border-border pt-3 flex flex-col gap-2">
-            {NAV_SECTIONS.map((section) => (
+            {HOME_ANCHORS.map((section) => (
               <a
                 key={section}
                 href={`#${section}`}
@@ -84,6 +97,16 @@ export function Navigation() {
               >
                 {t.nav[section as keyof typeof t.nav]}
               </a>
+            ))}
+            {LONG_READ_ROUTES.map((item) => (
+              <Link
+                key={item.key}
+                to={item.to}
+                className="nav-link-literary py-2"
+                onClick={() => setMobileOpen(false)}
+              >
+                {t.nav[item.key as keyof typeof t.nav]}
+              </Link>
             ))}
           </div>
         )}

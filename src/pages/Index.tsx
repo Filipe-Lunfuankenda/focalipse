@@ -1,4 +1,3 @@
-import { LanguageProvider } from '@/i18n/LanguageContext';
 import { Navigation } from '@/components/Navigation';
 import { SEOHead } from '@/components/SEOHead';
 import { HeroSection } from '@/components/HeroSection';
@@ -10,10 +9,7 @@ import { TaxonomySection } from '@/components/TaxonomySection';
 import { AdvancedTypesSection } from '@/components/AdvancedTypesSection';
 import { EffectsSection } from '@/components/EffectsSection';
 import { ExamplesSection } from '@/components/ExamplesSection';
-import { ManifestoSection } from '@/components/ManifestoSection';
-import { PhilosophySection } from '@/components/PhilosophySection';
-import { ChekhovSection } from '@/components/ChekhovSection';
-import { FaqSection } from '@/components/FaqSection';
+import { LongReadsSection } from '@/components/LongReadsSection';
 import { Suspense, lazy } from 'react';
 
 // ─── LAZY LOADED SECTIONS ───
@@ -23,8 +19,6 @@ const GeneratorSection = lazy(() => import('@/components/GeneratorSection').then
 const VerifierSection = lazy(() => import('@/components/VerifierSection').then(m => ({ default: m.VerifierSection })));
 const GroqGeneratorSection = lazy(() => import('@/components/GroqGeneratorSection').then(m => ({ default: m.GroqGeneratorSection })));
 const GroqVerifierSection = lazy(() => import('@/components/GroqVerifierSection').then(m => ({ default: m.GroqVerifierSection })));
-const ArticlesSection = lazy(() => import('@/components/ArticlesSection').then(m => ({ default: m.ArticlesSection })));
-const DifferencesSection = lazy(() => import('@/components/DifferencesSection').then(m => ({ default: m.DifferencesSection })));
 const FooterSection = lazy(() => import('@/components/FooterSection').then(m => ({ default: m.FooterSection })));
 
 // ─── LAZY LOADING FALLBACK ───
@@ -41,7 +35,7 @@ const SectionSkeleton = () => (
 
 const Index = () => {
   return (
-    <LanguageProvider>
+    <>
       <SEOHead />
       <Navigation />
       <main className="pt-14 md:pt-16">
@@ -54,11 +48,11 @@ const Index = () => {
         <AdvancedTypesSection />
         <EffectsSection />
         <ExamplesSection />
-        
+
         <Suspense fallback={<SectionSkeleton />}>
           <GeneratorSection />
         </Suspense>
-        
+
         <Suspense fallback={<SectionSkeleton />}>
           <VerifierSection />
         </Suspense>
@@ -70,26 +64,14 @@ const Index = () => {
         <Suspense fallback={<SectionSkeleton />}>
           <GroqVerifierSection />
         </Suspense>
-        
-        <ManifestoSection />
-        <PhilosophySection />
-        <ChekhovSection />
-        
-        <Suspense fallback={<SectionSkeleton />}>
-          <ArticlesSection />
-        </Suspense>
-        
-        <Suspense fallback={<SectionSkeleton />}>
-          <DifferencesSection />
-        </Suspense>
-        
-        <FaqSection />
-        
+
+        <LongReadsSection />
+
         <Suspense fallback={<SectionSkeleton />}>
           <FooterSection />
         </Suspense>
       </main>
-    </LanguageProvider>
+    </>
   );
 };
 
