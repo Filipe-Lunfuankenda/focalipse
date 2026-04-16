@@ -35,15 +35,12 @@ A página principal agrega secções narrativas/teóricas em sequência:
 - Exemplos
 - Gerador
 - Verificador
-- Manifesto
-- Filosofia
-- Chekhov
-- Artigos
-- Diferenças
-- FAQ
+- Biblioteca de leitura aprofundada (com acesso às páginas dedicadas)
 - Footer
 
 Cada secção usa componentes com animação de entrada e tipografia editorial, mantendo um ritmo visual coerente com o tema literário.
+
+As secções longas foram extraídas para páginas dedicadas em `/leituras/:slug` (manifesto, filosofia, chekhov, artigos, diferenças e FAQ), melhorando foco de leitura e escaneabilidade da home.
 
 ### 2) Navegação e UX
 
